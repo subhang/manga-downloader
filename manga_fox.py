@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import urllib2
 import os
-
+import sys
 curr_dir = os.getcwd()
 main_soup = BeautifulSoup("<html>Hi</html>")
 def get_image(html):
@@ -21,6 +21,7 @@ def download_chapter(manga,v,num):
         temp = v[1:]
         url = url+temp
         url = url+"/c"+str(num)+"/"
+        sys.stdout.write("Starting Download |")
         for i in range (1,23):
             link = url+str(i)+".html"
             
@@ -28,6 +29,10 @@ def download_chapter(manga,v,num):
             output = open(str(i)+".jpg","wb")
             output.write(image.read())
             output.close()
+            sys.stdout.write("=")
+        sys.stdout.write(">| 100% Done! ")
+        sys.stdout.write("Sucessfully Downloaded Chapter"+str(num))
+        
                   
 def get_info(link):
     a = link.split("/")
